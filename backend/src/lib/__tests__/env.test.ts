@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 describe("Environment Variable Validation", () => {
 	const originalEnv = process.env;
@@ -34,8 +34,6 @@ describe("Environment Variable Validation", () => {
 	it("should include a descriptive error message when JWT_SECRET is missing", async () => {
 		delete process.env.JWT_SECRET;
 		const { validateEnv } = await import("../env");
-		expect(() => validateEnv()).toThrowError(
-			/JWT_SECRET.*環境変数.*設定/,
-		);
+		expect(() => validateEnv()).toThrowError(/JWT_SECRET.*環境変数.*設定/);
 	});
 });

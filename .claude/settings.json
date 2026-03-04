@@ -1,0 +1,15 @@
+{
+	"hooks": {
+		"Stop": [
+			{
+				"matcher": "",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "cd \"$CLAUDE_PROJECT_DIR\" && bunx @biomejs/biome check --write . && cd frontend && bunx tsc --noEmit && cd ../backend && bunx tsc --noEmit"
+					}
+				]
+			}
+		]
+	}
+}
