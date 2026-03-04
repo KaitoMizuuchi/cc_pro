@@ -9,13 +9,14 @@
 		"test:watch": "vitest"
 	},
 	"dependencies": {
-		"@prisma/client": "^6.19.0",
+		"@prisma/client": "^7.0.0",
+		"dotenv": "^17.3.1",
 		"hono": "^4.7.0",
 		"zod": "^3.24.0"
 	},
 	"devDependencies": {
 		"@types/bun": "^1.2.0",
-		"prisma": "^6.19.0",
+		"prisma": "^7.0.0",
 		"vitest": "^3.0.0"
 	}
 }

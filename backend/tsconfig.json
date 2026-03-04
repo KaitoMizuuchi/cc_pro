@@ -12,7 +12,7 @@
 		"noEmit": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
-		"types": ["bun-types"]
+		"types": ["@types/bun"]
 	},
 	"include": ["src/**/*.ts"],
 	"exclude": ["node_modules", "dist"]
