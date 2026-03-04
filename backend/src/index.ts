@@ -1,6 +1,10 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
+import { validateEnv } from "./lib/env";
+
+// サーバー起動時に必須環境変数をチェック。未設定の場合はプロセスを中断する
+validateEnv();
 
 const app = new Hono();
 
