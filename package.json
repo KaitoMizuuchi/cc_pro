@@ -1,0 +1,21 @@
+{
+	"name": "hr-management",
+	"private": true,
+	"workspaces": [
+		"frontend",
+		"backend"
+	],
+	"scripts": {
+		"dev": "bun run --filter '*' dev",
+		"dev:frontend": "bun run --filter frontend dev",
+		"dev:backend": "bun run --filter backend dev",
+		"build": "bun run --filter '*' build",
+		"test": "bun run --filter '*' test",
+		"lint": "bunx @biomejs/biome check .",
+		"lint:fix": "bunx @biomejs/biome check --write .",
+		"format": "bunx @biomejs/biome format --write .",
+		"db:migrate": "cd backend && bunx prisma migrate dev",
+		"db:generate": "cd backend && bunx prisma generate",
+		"db:studio": "cd backend && bunx prisma studio"
+	}
+}

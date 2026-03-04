@@ -1,0 +1,21 @@
+{
+	"name": "backend",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "bun run --hot src/index.ts",
+		"build": "bun build src/index.ts --outdir dist --target bun",
+		"test": "vitest run",
+		"test:watch": "vitest"
+	},
+	"dependencies": {
+		"@prisma/client": "^6.19.0",
+		"hono": "^4.7.0",
+		"zod": "^3.24.0"
+	},
+	"devDependencies": {
+		"@types/bun": "^1.2.0",
+		"prisma": "^6.19.0",
+		"vitest": "^3.0.0"
+	}
+}

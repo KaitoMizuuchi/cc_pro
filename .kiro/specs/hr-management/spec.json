@@ -1,12 +1,12 @@
 {
-	"feature_name": "{{FEATURE_NAME}}",
-	"created_at": "{{TIMESTAMP}}",
-	"updated_at": "{{TIMESTAMP}}",
+	"feature_name": "hr-management",
+	"created_at": "2026-03-04T00:00:00Z",
+	"updated_at": "2026-03-04T00:00:00Z",
 	"language": "ja",
-	"phase": "initialized",
+	"phase": "requirements-generated",
 	"approvals": {
 		"requirements": {
-			"generated": false,
+			"generated": true,
 			"approved": false
 		},
 		"design": {
