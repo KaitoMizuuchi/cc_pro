@@ -1,6 +1,6 @@
 import { EMPLOYEE_STATUS_LABELS, type Employee } from "@hr-management/shared";
-import { Eye, Pencil, Trash2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Pencil, Trash2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const statusColors: Record<string, string> = {
 	ACTIVE: "bg-green-100 text-green-800",
@@ -15,6 +15,8 @@ type Props = {
 };
 
 export function EmployeeTable({ employees, onEdit, onDelete }: Props) {
+	const navigate = useNavigate();
+
 	if (employees.length === 0) {
 		return (
 			<div className="py-12 text-center text-gray-500">
@@ -53,7 +55,11 @@ export function EmployeeTable({ employees, onEdit, onDelete }: Props) {
 				</thead>
 				<tbody className="divide-y divide-gray-200 bg-white">
 					{employees.map((emp) => (
-						<tr key={emp.id} className="hover:bg-gray-50">
+						<tr
+							key={emp.id}
+							className="cursor-pointer hover:bg-gray-50"
+							onClick={() => navigate(`/employees/${emp.id}`)}
+						>
 							<td className="whitespace-nowrap px-4 py-3 text-sm font-medium text-gray-900">
 								{emp.lastName} {emp.firstName}
 							</td>
@@ -78,16 +84,12 @@ export function EmployeeTable({ employees, onEdit, onDelete }: Props) {
 							</td>
 							<td className="whitespace-nowrap px-4 py-3 text-sm">
 								<div className="flex items-center gap-2">
-									<Link
-										to={`/employees/${emp.id}`}
-										className="text-gray-400 hover:text-blue-600"
-										title="詳細"
-									>
-										<Eye className="h-4 w-4" />
-									</Link>
 									<button
 										type="button"
-										onClick={() => onEdit(emp)}
+										onClick={(e) => {
+											e.stopPropagation();
+											onEdit(emp);
+										}}
 										className="text-gray-400 hover:text-blue-600"
 										title="編集"
 									>
@@ -95,7 +97,10 @@ export function EmployeeTable({ employees, onEdit, onDelete }: Props) {
 									</button>
 									<button
 										type="button"
-										onClick={() => onDelete(emp.id)}
+										onClick={(e) => {
+											e.stopPropagation();
+											onDelete(emp.id);
+										}}
 										className="text-gray-400 hover:text-red-600"
 										title="削除"
 									>

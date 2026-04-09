@@ -1,4 +1,4 @@
-import { LayoutDashboard, LogOut, Users } from "lucide-react";
+import { LogOut, Users } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 
@@ -20,10 +20,6 @@ export function SideNavigation() {
 
 			<nav className="flex-1 space-y-1 p-4">
 				<NavLink to="/" end className={navLinkClass}>
-					<LayoutDashboard className="h-4 w-4" />
-					ダッシュボード
-				</NavLink>
-				<NavLink to="/" className={navLinkClass}>
 					<Users className="h-4 w-4" />
 					従業員管理
 				</NavLink>

@@ -3,6 +3,7 @@ import { Plus } from "lucide-react";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
+import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { EmployeeFormModal } from "@/features/employees/components/EmployeeFormModal";
 import { EmployeeTable } from "@/features/employees/components/EmployeeTable";
 import {
@@ -22,6 +23,7 @@ export function DashboardPage() {
 	const [editingEmployee, setEditingEmployee] = useState<
 		Employee | undefined
 	>();
+	const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
 
 	const openCreate = () => {
 		setEditingEmployee(undefined);
@@ -33,10 +35,17 @@ export function DashboardPage() {
 		setModalOpen(true);
 	};
 
-	const handleDelete = (id: string) => {
-		if (!window.confirm("この従業員を削除しますか？")) return;
-		deleteMutation.mutate(id, {
-			onSuccess: () => toast.success("従業員を削除しました"),
+	const handleDeleteRequest = (id: string) => {
+		setDeleteTargetId(id);
+	};
+
+	const handleDeleteConfirm = () => {
+		if (!deleteTargetId) return;
+		deleteMutation.mutate(deleteTargetId, {
+			onSuccess: () => {
+				toast.success("従業員を削除しました");
+				setDeleteTargetId(null);
+			},
 			onError: () => toast.error("削除に失敗しました。再度お試しください"),
 		});
 	};
@@ -65,7 +74,7 @@ export function DashboardPage() {
 						<EmployeeTable
 							employees={data.employees}
 							onEdit={openEdit}
-							onDelete={handleDelete}
+							onDelete={handleDeleteRequest}
 						/>
 					</div>
 
@@ -102,6 +111,15 @@ export function DashboardPage() {
 				open={modalOpen}
 				onClose={() => setModalOpen(false)}
 				employee={editingEmployee}
+			/>
+
+			<ConfirmDialog
+				open={!!deleteTargetId}
+				title="従業員の削除"
+				message="この従業員を削除しますか？この操作は取り消せません。"
+				onConfirm={handleDeleteConfirm}
+				onCancel={() => setDeleteTargetId(null)}
+				isPending={deleteMutation.isPending}
 			/>
 		</div>
 	);

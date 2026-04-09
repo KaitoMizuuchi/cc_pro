@@ -53,7 +53,15 @@ export function EmployeeFormModal({ open, onClose, employee }: Props) {
 							note: employee.note ?? undefined,
 						}
 					: {
+							lastName: "",
+							firstName: "",
+							email: "",
+							phone: undefined,
+							departmentId: "",
+							position: "",
+							hireDate: "",
 							status: "ACTIVE",
+							note: undefined,
 						},
 			);
 		}
