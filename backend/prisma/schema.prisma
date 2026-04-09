@@ -41,7 +41,9 @@ model Employee {
   note         String?
   createdAt    DateTime       @default(now()) @map("created_at")
   updatedAt    DateTime       @updatedAt @map("updated_at")
-  department   Department     @relation(fields: [departmentId], references: [id])
+  department     Department      @relation(fields: [departmentId], references: [id])
+  ledProjects    Project[]       @relation("ProjectLeader")
+  projectMembers ProjectMember[]
 
   @@map("employees")
 }
@@ -50,4 +52,29 @@ enum EmployeeStatus {
   ACTIVE
   ON_LEAVE
   RETIRED
+}
+
+model Project {
+  id          String          @id @default(cuid())
+  name        String          @unique
+  description String
+  leaderId    String          @map("leader_id")
+  createdAt   DateTime        @default(now()) @map("created_at")
+  updatedAt   DateTime        @updatedAt @map("updated_at")
+  leader      Employee        @relation("ProjectLeader", fields: [leaderId], references: [id])
+  members     ProjectMember[]
+
+  @@map("projects")
+}
+
+model ProjectMember {
+  id         String   @id @default(cuid())
+  projectId  String   @map("project_id")
+  employeeId String   @map("employee_id")
+  createdAt  DateTime @default(now()) @map("created_at")
+  project    Project  @relation(fields: [projectId], references: [id])
+  employee   Employee @relation(fields: [employeeId], references: [id])
+
+  @@unique([projectId, employeeId])
+  @@map("project_members")
 }

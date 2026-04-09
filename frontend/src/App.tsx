@@ -6,6 +6,8 @@ import { AuthProvider } from "@/features/auth/hooks/useAuth";
 import { DashboardPage } from "@/pages/DashboardPage";
 import { EmployeeDetailPage } from "@/pages/EmployeeDetailPage";
 import { LoginPage } from "@/pages/LoginPage";
+import { ProjectDetailPage } from "@/pages/ProjectDetailPage";
+import { ProjectsPage } from "@/pages/ProjectsPage";
 import { SignupPage } from "@/pages/SignupPage";
 
 export function App() {
@@ -21,6 +23,8 @@ export function App() {
 					<Route element={<ManagementLayout />}>
 						<Route path="/" element={<DashboardPage />} />
 						<Route path="/employees/:id" element={<EmployeeDetailPage />} />
+						<Route path="/projects" element={<ProjectsPage />} />
+						<Route path="/projects/:id" element={<ProjectDetailPage />} />
 					</Route>
 				</Route>
 			</Routes>

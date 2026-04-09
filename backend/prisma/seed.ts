@@ -256,6 +256,91 @@ async function main() {
 		});
 	}
 	console.log(`従業員データ ${employees.length}件 を投入しました`);
+
+	// プロジェクトの投入
+	const projects = [
+		{
+			name: "次世代HRシステム開発",
+			description:
+				"社内HR管理システムのフルリニューアルプロジェクト。最新技術スタックへの移行と業務効率化を目指す。",
+			leaderEmail: "ito.kenta@example.com",
+			memberEmails: [
+				"watanabe.sakura@example.com",
+				"yamamoto.daisuke@example.com",
+				"nakamura.ai@example.com",
+				"kobayashi.shota@example.com",
+				"yoshida.takuya@example.com",
+			],
+		},
+		{
+			name: "営業DX推進",
+			description:
+				"営業プロセスのデジタルトランスフォーメーション。CRM導入と営業データ分析基盤の構築。",
+			leaderEmail: "tanaka.taro@example.com",
+			memberEmails: [
+				"sato.hanako@example.com",
+				"suzuki.ichiro@example.com",
+				"takahashi.misaki@example.com",
+			],
+		},
+		{
+			name: "社内研修制度改革",
+			description:
+				"従業員のスキルアップを支援する新研修制度の設計と導入。eラーニング基盤の整備を含む。",
+			leaderEmail: "kato.yumi@example.com",
+			memberEmails: [
+				"yoshida.takuya@example.com",
+				"matsumoto.takashi@example.com",
+				"inoue.yoko@example.com",
+				"mori.ayaka@example.com",
+			],
+		},
+		{
+			name: "経理システム移行",
+			description:
+				"レガシー経理システムからクラウドベースの新システムへの移行プロジェクト。",
+			leaderEmail: "shimizu.makoto@example.com",
+			memberEmails: [
+				"mori.ayaka@example.com",
+				"ikeda.osamu@example.com",
+				"kimura.daichi@example.com",
+				"hayashi.megumi@example.com",
+			],
+		},
+	];
+
+	for (const proj of projects) {
+		const leader = await prisma.employee.findUnique({
+			where: { email: proj.leaderEmail },
+		});
+		if (!leader) {
+			console.error(`リーダーが見つかりません: ${proj.leaderEmail}`);
+			continue;
+		}
+
+		const project = await prisma.project.upsert({
+			where: { name: proj.name },
+			update: {},
+			create: {
+				name: proj.name,
+				description: proj.description,
+				leaderId: leader.id,
+			},
+		});
+
+		const memberEmployees = await prisma.employee.findMany({
+			where: { email: { in: proj.memberEmails } },
+		});
+
+		await prisma.projectMember.createMany({
+			data: memberEmployees.map((emp) => ({
+				projectId: project.id,
+				employeeId: emp.id,
+			})),
+			skipDuplicates: true,
+		});
+	}
+	console.log(`プロジェクトデータ ${projects.length}件 を投入しました`);
 }
 
 main()

@@ -6,6 +6,9 @@ export {
 	EMPLOYEE_ERROR_CODES,
 	EMPLOYEE_STATUS_LABELS,
 } from "./constants/employee";
+// Project
+export type { ProjectErrorCode } from "./constants/project";
+export { PROJECT_ERROR_CODES } from "./constants/project";
 export type {
 	AuthErrorResponse,
 	AuthResult,
@@ -20,6 +23,12 @@ export type {
 	EmployeeStatus,
 } from "./types/employee";
 export type {
+	Project,
+	ProjectDetail,
+	ProjectLeader,
+	ProjectMember,
+} from "./types/project";
+export type {
 	LoginRequest,
 	SignupFormInput,
 	SignupRequest,
@@ -29,7 +38,6 @@ export {
 	signupBaseSchema,
 	signupFormSchema,
 } from "./validators/auth";
-
 export type {
 	CreateEmployeeRequest,
 	UpdateEmployeeRequest,

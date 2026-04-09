@@ -6,6 +6,7 @@ import { authMiddleware } from "./middleware/auth";
 import { authRoutes } from "./routes/auth";
 import { departmentRoutes } from "./routes/department";
 import { employeeRoutes } from "./routes/employee";
+import { projectRoutes } from "./routes/project";
 
 // サーバー起動時に必須環境変数をチェック。未設定の場合はプロセスを中断する
 validateEnv();
@@ -30,6 +31,7 @@ app.get("/api/health", (c) => {
 app.route("/api/auth", authRoutes);
 app.route("/api/departments", departmentRoutes);
 app.route("/api/employees", employeeRoutes);
+app.route("/api/projects", projectRoutes);
 
 export default {
 	port: 3000,
