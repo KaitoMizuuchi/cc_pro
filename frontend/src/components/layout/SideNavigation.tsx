@@ -1,5 +1,13 @@
-import { LogOut } from "lucide-react";
+import { LayoutDashboard, LogOut, Users } from "lucide-react";
+import { NavLink } from "react-router-dom";
 import { useAuth } from "@/features/auth/hooks/useAuth";
+
+const navLinkClass = ({ isActive }: { isActive: boolean }) =>
+	`flex items-center gap-2 rounded-md px-3 py-2 text-sm ${
+		isActive
+			? "bg-blue-50 font-medium text-blue-700"
+			: "text-gray-700 hover:bg-gray-100"
+	}`;
 
 export function SideNavigation() {
 	const { user, logout } = useAuth();
@@ -10,7 +18,16 @@ export function SideNavigation() {
 				<h2 className="text-lg font-bold text-gray-900">HR管理</h2>
 			</div>
 
-			<nav className="flex-1 p-4">{/* 将来のナビゲーションリンク */}</nav>
+			<nav className="flex-1 space-y-1 p-4">
+				<NavLink to="/" end className={navLinkClass}>
+					<LayoutDashboard className="h-4 w-4" />
+					ダッシュボード
+				</NavLink>
+				<NavLink to="/" className={navLinkClass}>
+					<Users className="h-4 w-4" />
+					従業員管理
+				</NavLink>
+			</nav>
 
 			<div className="border-t border-gray-200 p-4">
 				<p className="truncate text-sm text-gray-600">{user?.email}</p>

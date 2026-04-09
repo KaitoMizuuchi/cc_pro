@@ -11,5 +11,6 @@
 				]
 			}
 		]
-	}
+	},
+	"plansDirectory": "./plans"
 }
