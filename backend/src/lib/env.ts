@@ -2,6 +2,8 @@ interface Env {
 	JWT_SECRET: string;
 }
 
+let validatedEnv: Env | null = null;
+
 export function validateEnv(): Env {
 	const jwtSecret = process.env.JWT_SECRET;
 
@@ -11,7 +13,13 @@ export function validateEnv(): Env {
 		);
 	}
 
-	return {
-		JWT_SECRET: jwtSecret,
-	};
+	validatedEnv = { JWT_SECRET: jwtSecret };
+	return validatedEnv;
+}
+
+export function getEnv(): Env {
+	if (!validatedEnv) {
+		return validateEnv();
+	}
+	return validatedEnv;
 }

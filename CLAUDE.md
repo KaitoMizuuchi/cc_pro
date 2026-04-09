@@ -1,30 +1,85 @@
-## 概要
+# CLAUDE.md
 
-このディレクトリは、claude codeを触りながら、検証していくためのディレクトリです。
-実際のプロダクト開発を想定して、検証します。
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## 検証スコープ
+## プロジェクト概要
 
-- AI駆動開発における開発フローを定着させる
+HR管理Webアプリ（hr-management）。AI駆動開発フローの検証用プロジェクト。
+TypeScript + bun monorepo（`frontend/` / `backend/` workspaces）。
+
+## コマンド
+
+### 開発サーバー
+```bash
+bun run dev              # frontend + backend 同時起動
+bun run dev:frontend     # frontend のみ (Vite, localhost:5173)
+bun run dev:backend      # backend のみ (Hono, localhost:3000)
+```
+
+### DB（PostgreSQL on Docker）
+```bash
+docker compose up -d            # DB起動
+bun run db:migrate              # マイグレーション実行
+bun run db:generate             # Prisma Client 生成
+bun run db:studio               # Prisma Studio 起動
+```
+- DB接続情報: `POSTGRES_USER=postgres`, `POSTGRES_PASSWORD=postgres`, `POSTGRES_DB=hr_management`, ポート5432
+- 環境変数 `DATABASE_URL` と `JWT_SECRET` が必須（`.env`に設定）
+
+### リント・フォーマット
+```bash
+bun run lint             # Biome check
+bun run lint:fix         # Biome check --write（自動修正）
+bun run format           # Biome format --write
+```
+
+### テスト
+```bash
+bun run test                           # 全workspace テスト実行
+cd frontend && bunx vitest run         # frontend テストのみ
+cd backend && bunx vitest run          # backend テストのみ
+cd frontend && bunx vitest run src/path/to/file.test.ts  # 単一テスト
+```
+
+### ビルド
+```bash
+bun run build            # 全workspace ビルド
+```
+
+## アーキテクチャ
+
+### モノレポ構成
+- **`frontend/`**: React + Vite。`@` エイリアスで `src/` を参照。Vite devサーバーが `/api` を backend (localhost:3000) にプロキシ。
+- **`backend/`**: Hono。`bun run --hot` でホットリロード。APIエンドポイントは `/api/` プレフィックス。
+
+### Prisma
+- スキーマ: `backend/prisma/schema.prisma`
+- 生成先: `backend/src/generated/prisma/`（gitで管理されている）
+- 設定: `backend/prisma.config.ts` で `dotenv/config` を読み込み
+- アダプタ: `@prisma/adapter-pg`（PostgreSQL直接接続）
+- モデル: User, Department, Employee（snake_case `@@map` でDB上のテーブル名・カラム名をマッピング）
+
+### コードスタイル（Biome）
+- インデント: タブ
+- クォート: ダブルクォート
+- セミコロン: あり
+- `*.config.ts` では `noDefaultExport` ルール無効
 
 ## 開発環境
 
-webアプリを想定。
-基本的には以下で開発します。
-言語はTypeScriptです。ランタイムはbunです。
-| 開発環境 | ライブラリ |
+| レイヤー | ライブラリ |
 | -- | -- |
 | フロントエンド | React + Vite |
 | バックエンド | Hono |
-| DB | PostgreSQL（Dockerで立てる） |
+| DB | PostgreSQL（Docker） |
 | ORM | Prisma |
 | ルーティング | react-router-dom |
 | キャッシュ | TanStack Query |
 | 入力ハンドラ | react-hook-form |
 | バリデーション | zod |
-| スタイル | tailwind CSS |
+| スタイル | Tailwind CSS |
 | アイコン | lucide-react |
-| テストライブラリ | vitest |
+| テスト | vitest, @testing-library/react |
 | リンター・フォーマッター | Biome |
 
 

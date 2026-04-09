@@ -2,6 +2,7 @@
 	"name": "hr-management",
 	"private": true,
 	"workspaces": [
+		"shared",
 		"frontend",
 		"backend"
 	],
