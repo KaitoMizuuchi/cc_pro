@@ -53,7 +53,7 @@ export function ProjectDetailPage() {
 
 			<h2 className="mb-4 text-lg font-bold text-gray-900">メンバー一覧</h2>
 			<div className="rounded-lg border border-gray-200 bg-white shadow">
-				<ProjectMemberTable members={project.members} />
+				<ProjectMemberTable members={project.members} projectId={id ?? ""} />
 			</div>
 		</div>
 	);

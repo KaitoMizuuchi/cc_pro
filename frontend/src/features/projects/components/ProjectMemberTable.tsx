@@ -1,10 +1,14 @@
 import type { ProjectMember } from "@hr-management/shared";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
 	members: ProjectMember[];
+	projectId: string;
 };
 
-export function ProjectMemberTable({ members }: Props) {
+export function ProjectMemberTable({ members, projectId }: Props) {
+	const navigate = useNavigate();
+
 	if (members.length === 0) {
 		return (
 			<div className="py-12 text-center text-gray-500">
@@ -34,7 +38,15 @@ export function ProjectMemberTable({ members }: Props) {
 				</thead>
 				<tbody className="divide-y divide-gray-200 bg-white">
 					{members.map((member) => (
-						<tr key={member.id}>
+						<tr
+							key={member.id}
+							onClick={() =>
+								navigate(`/employees/${member.employeeId}`, {
+									state: { from: `/projects/${projectId}` },
+								})
+							}
+							className="cursor-pointer hover:bg-gray-50"
+						>
 							<td className="whitespace-nowrap px-4 py-3 text-sm font-medium text-gray-900">
 								{member.lastName} {member.firstName}
 							</td>
