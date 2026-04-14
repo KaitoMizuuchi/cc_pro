@@ -74,6 +74,10 @@ bun run build            # 全workspace ビルド
 - セミコロン: あり
 - `*.config.ts` では `noDefaultExport` ルール無効
 
+### 注意事項
+
+- `frontend/tsconfig.json` に `composite: true`、`declaration: true`、`emitDeclarationOnly: true` が設定されている。型チェック時は必ず `tsc --noEmit` を使うこと。`tsc` を `--noEmit` なしで実行すると `frontend/src/` 配下に大量の `.d.ts` ファイルが生成されるため注意。
+
 ### 開発ガイドライン
 
 一つのファイルに複数の役割を持たせないようにする。

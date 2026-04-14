@@ -1,4 +1,4 @@
-import { FolderKanban, LogOut, Users } from "lucide-react";
+import { BookOpen, FolderKanban, LogOut, Users } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 
@@ -26,6 +26,10 @@ export function SideNavigation() {
 				<NavLink to="/projects" className={navLinkClass}>
 					<FolderKanban className="h-4 w-4" />
 					プロジェクト管理
+				</NavLink>
+				<NavLink to="/books" className={navLinkClass}>
+					<BookOpen className="h-4 w-4" />
+					書籍管理
 				</NavLink>
 			</nav>
 

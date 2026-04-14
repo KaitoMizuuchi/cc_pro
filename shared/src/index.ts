@@ -1,5 +1,8 @@
 export type { AuthErrorCode } from "./constants/auth";
 export { AUTH_ERROR_CODES } from "./constants/auth";
+// Book
+export type { BookErrorCode } from "./constants/book";
+export { BOOK_ERROR_CODES, BOOK_STATUS_LABELS } from "./constants/book";
 // Employee
 export type { EmployeeErrorCode } from "./constants/employee";
 export {
@@ -16,6 +19,14 @@ export type {
 	LoginResponse,
 	SignupResponse,
 } from "./types/auth";
+export type {
+	Book,
+	BookBorrower,
+	BookListResponse,
+	BookRegistrant,
+	BookStatus,
+	IsbnLookupResult,
+} from "./types/book";
 export type {
 	Department,
 	Employee,
@@ -38,6 +49,15 @@ export {
 	signupBaseSchema,
 	signupFormSchema,
 } from "./validators/auth";
+export type {
+	CreateBookRequest,
+	UpdateBookRequest,
+} from "./validators/book";
+export {
+	bookStatusSchema,
+	createBookSchema,
+	updateBookSchema,
+} from "./validators/book";
 export type {
 	CreateEmployeeRequest,
 	UpdateEmployeeRequest,

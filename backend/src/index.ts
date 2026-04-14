@@ -4,6 +4,7 @@ import { logger } from "hono/logger";
 import { validateEnv } from "./lib/env";
 import { authMiddleware } from "./middleware/auth";
 import { authRoutes } from "./routes/auth";
+import { bookRoutes } from "./routes/book";
 import { departmentRoutes } from "./routes/department";
 import { employeeRoutes } from "./routes/employee";
 import { projectRoutes } from "./routes/project";
@@ -31,6 +32,7 @@ app.get("/api/health", (c) => {
 app.route("/api/auth", authRoutes);
 app.route("/api/departments", departmentRoutes);
 app.route("/api/employees", employeeRoutes);
+app.route("/api/books", bookRoutes);
 app.route("/api/projects", projectRoutes);
 
 export default {
