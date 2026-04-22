@@ -31,6 +31,9 @@ body:
     attributes:
       label: 調査内容・アプローチ
       description: どのような方法・手順で調査するか。チェックボックス形式で手順を列挙してください。
+      placeholder: |
+        - [ ]
+        - [ ]
     validations:
       required: true
 
@@ -39,6 +42,9 @@ body:
     attributes:
       label: 期待するアウトカム
       description: 調査完了の定義。何が分かれば完了とするかをチェックボックス形式で列挙してください。
+      placeholder: |
+        - [ ]
+        - [ ]
     validations:
       required: true
 
