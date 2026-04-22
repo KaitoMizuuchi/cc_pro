@@ -2,15 +2,6 @@ name: Spike (技術調査・検証・PoC)
 description: 実装前の意思決定のために必要な技術調査・検証・PoC を行う
 title: "[Spike] <調査したい問い>"
 body:
-  - type: markdown
-    attributes:
-      value: |
-        ## 記入ガイド
-
-        - **タイトル**: 調査したい問いを疑問形で記述してください（例: `[Spike] 状態管理に Zustand と Jotai のどちらを採用すべきか？`）
-        - **タイムボックス**: 調査の上限時間は GitHub Projects の Estimate / Due Date で管理してください
-        - **調査結果**: 調査完了後の結論・推奨事項・次のアクションは Issue のコメントに記載してください
-
   - type: textarea
     id: purpose
     attributes:

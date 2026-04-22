@@ -2,14 +2,6 @@ name: PBI (Product Backlog Item)
 description: スクラム開発で管理する1つの開発作業単位（機能追加・UX改善・不具合修正・具体的な非機能改善）
 title: "[ユーザー] として、[目的 / 行動] ができる"
 body:
-  - type: markdown
-    attributes:
-      value: |
-        ## 記入ガイド
-
-        - **タイトル**: ユーザーストーリー形式で記述してください（例: `買い手として、買い物カゴに本を入れることができる`）
-        - **1 PBI = 1 開発者アサイン**: タスク分解が必要な場合は担当開発者がサブ issue を起票してください
-
   - type: textarea
     id: why
     attributes:
