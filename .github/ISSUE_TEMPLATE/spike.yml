@@ -30,7 +30,7 @@ body:
     id: approach
     attributes:
       label: 調査内容・アプローチ
-      description: どのような方法・手順で調査するか。チェックボックス形式で手順を列挙してください。
+      description: どのような方法・手順で調査するか。
       placeholder: |
         - [ ]
         - [ ]
@@ -41,7 +41,7 @@ body:
     id: expected-outcome
     attributes:
       label: 期待するアウトカム
-      description: 調査完了の定義。何が分かれば完了とするかをチェックボックス形式で列挙してください。
+      description: 調査完了の定義。何が分かれば完了とするか。
       placeholder: |
         - [ ]
         - [ ]
