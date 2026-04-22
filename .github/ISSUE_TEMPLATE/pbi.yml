@@ -6,7 +6,7 @@ body:
     id: why
     attributes:
       label: Why（背景・目的）
-      description: なぜこれが必要か。関連する PRD・ADR へのリンクも添えてください。
+      description: なぜこれが必要か。関連する PRD・ADR へのリンクも併記。
     validations:
       required: true
 
@@ -14,7 +14,7 @@ body:
     id: what
     attributes:
       label: What（詳細）
-      description: 具体的に何を実現するか。UI・データ・挙動の要件を書いてください。
+      description: 具体的に何を実現するか（UI・データ・挙動の要件）。
     validations:
       required: true
 
@@ -22,7 +22,7 @@ body:
     id: acceptance-criteria
     attributes:
       label: 受け入れ基準
-      description: このPBIが完了とみなされる条件をチェックボックス形式で列挙してください。正常系だけでなく異常系（エラーハンドリング等）も含めてください。
+      description: このPBIが完了とみなされる条件。正常系・異常系（エラーハンドリング等）ともに含める。
       value: |
         - [ ]
         - [ ] 
@@ -36,6 +36,6 @@ body:
     id: out-of-scope
     attributes:
       label: スコープ外（任意）
-      description: 誤解・スコープクリープを防ぐため、本PBIで「やらないこと」を明示してください。該当がなければ空欄で構いません。
+      description: 誤解・スコープクリープを防ぐため、本PBIで「やらないこと」を明示（該当なしの場合は空欄）。
     validations:
       required: false

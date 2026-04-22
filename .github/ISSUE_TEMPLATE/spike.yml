@@ -14,7 +14,7 @@ body:
     id: scope-in
     attributes:
       label: 調査スコープ（対象）
-      description: 調査する範囲・対象を明確にしてください。
+      description: 何を調査対象とするか。
     validations:
       required: true
 
@@ -22,7 +22,7 @@ body:
     id: scope-out
     attributes:
       label: 調査スコープ（対象外）
-      description: 調査対象外とする範囲を明確にしてください。該当がなければ空欄で構いません。
+      description: 何を調査対象外とするか（該当なしの場合は空欄）。
     validations:
       required: false
 
@@ -52,6 +52,6 @@ body:
     id: references
     attributes:
       label: 参考資料
-      description: 公式ドキュメント、既存の記事、関連 Issue など。該当がなければ空欄で構いません。
+      description: 公式ドキュメント・既存の記事・関連 Issue など（該当なしの場合は空欄）。
     validations:
       required: false
