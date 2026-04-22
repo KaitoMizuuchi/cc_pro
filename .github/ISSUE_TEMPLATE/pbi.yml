@@ -1,0 +1,49 @@
+name: PBI (Product Backlog Item)
+description: スクラム開発で管理する1つの開発作業単位（機能追加・UX改善・不具合修正・具体的な非機能改善）
+title: "[ユーザー] として、[目的 / 行動] ができる"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 記入ガイド
+
+        - **タイトル**: ユーザーストーリー形式で記述してください（例: `買い手として、買い物カゴに本を入れることができる`）
+        - **1 PBI = 1 開発者アサイン**: タスク分解が必要な場合は担当開発者がサブ issue を起票してください
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why（背景・目的）
+      description: なぜこれが必要か。関連する PRD・ADR へのリンクも添えてください。
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What（詳細）
+      description: 具体的に何を実現するか。UI・データ・挙動の要件を書いてください。
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: 受け入れ基準
+      description: このPBIが完了とみなされる条件をチェックボックス形式で列挙してください。正常系だけでなく異常系（エラーハンドリング等）も含めてください。
+      value: |
+        - [ ]
+        - [ ] 
+        - [ ] 設計ドキュメントを更新している
+        - [ ] 単体テストが通過している
+        - [ ] 結合テスト（ユーザーストーリー単位）が通過している
+    validations:
+      required: true
+
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: スコープ外（任意）
+      description: 誤解・スコープクリープを防ぐため、本PBIで「やらないこと」を明示してください。該当がなければ空欄で構いません。
+    validations:
+      required: false

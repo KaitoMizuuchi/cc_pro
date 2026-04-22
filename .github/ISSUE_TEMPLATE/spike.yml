@@ -1,0 +1,60 @@
+name: Spike (技術調査・検証・PoC)
+description: 実装前の意思決定のために必要な技術調査・検証・PoC を行う
+title: "[Spike] <調査したい問い>"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 記入ガイド
+
+        - **タイトル**: 調査したい問いを疑問形で記述してください（例: `[Spike] 状態管理に Zustand と Jotai のどちらを採用すべきか？`）
+        - **タイムボックス**: 調査の上限時間は GitHub Projects の Estimate / Due Date で管理してください
+        - **調査結果**: 調査完了後の結論・推奨事項・次のアクションは Issue のコメントに記載してください
+
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 調査目的
+      description: 何を明らかにしたいか、どんな意思決定のために調査するか。
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope-in
+    attributes:
+      label: 調査スコープ（対象）
+      description: 調査する範囲・対象を明確にしてください。
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope-out
+    attributes:
+      label: 調査スコープ（対象外）
+      description: 調査対象外とする範囲を明確にしてください。該当がなければ空欄で構いません。
+    validations:
+      required: false
+
+  - type: textarea
+    id: approach
+    attributes:
+      label: 調査内容・アプローチ
+      description: どのような方法・手順で調査するか。チェックボックス形式で手順を列挙してください。
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-outcome
+    attributes:
+      label: 期待するアウトカム
+      description: 調査完了の定義。何が分かれば完了とするかをチェックボックス形式で列挙してください。
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: 参考資料
+      description: 公式ドキュメント、既存の記事、関連 Issue など。該当がなければ空欄で構いません。
+    validations:
+      required: false
