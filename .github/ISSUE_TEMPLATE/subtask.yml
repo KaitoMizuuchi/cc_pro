@@ -1,0 +1,31 @@
+name: Sub-task
+description: PBI から切り出す実装単位のサブタスク（How にフォーカス）
+title: "[Sub-task] <作業内容>"
+body:
+  - type: textarea
+    id: work
+    attributes:
+      label: 作業内容
+      description: このサブタスクで何を実装・変更するか（対象ファイル・モジュール・実装方針など）。
+    validations:
+      required: true
+
+  - type: textarea
+    id: dod
+    attributes:
+      label: 完了条件
+      description: このサブタスクが完了とみなされる条件。必要に応じて追記・削除する。
+      value: |
+        - [ ]
+        - [ ] 単体テスト追加・通過
+        - [ ] PRレビュー通過
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: 補足
+      description: 設計メモ・参考リンク・残課題など（該当なしの場合は空欄）。
+    validations:
+      required: false
