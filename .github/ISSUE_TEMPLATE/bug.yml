@@ -1,0 +1,72 @@
+name: バグ
+description: スクラム開発で管理するバグ起票用の Issue（再現手順・期待挙動・発生環境を伴う不具合報告）
+title: "[バグ] <バグ内容>"
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: バグの概要
+      description: どんなバグが起きているかを 1〜2 行で要約する。
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: 再現手順
+      description: 誰でも同じ操作で再現できるよう、番号付きで具体的に記述する。
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: 期待される挙動
+      description: 本来どうあるべきかを記述する。
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: 実際の挙動
+      description: 現状どうなっているか（エラーメッセージ、画面の状態など）を記述する。
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 発生環境
+      description: ブラウザ・デバイス・環境（local / dev / prod）を列挙する。複数該当する場合はすべて記載する。
+    validations:
+      required: true
+
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: 頻度
+      description: バグの再現性。
+      options:
+        - 常に再現する
+        - 特定条件下で再現する
+        - 散発的に発生する
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: 受け入れ基準
+      description: このバグが修正完了とみなされる条件。必要に応じて追記・削除する。
+      value: |
+        - [ ] 再現手順を実行しても期待挙動になっている
+        - [ ] リグレッションテストを追加している
+        - [ ] 単体テストが通過している
+        - [ ] 結合テストが通過している
+    validations:
+      required: true
