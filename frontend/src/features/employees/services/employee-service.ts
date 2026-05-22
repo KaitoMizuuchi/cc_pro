@@ -48,3 +48,15 @@ export function deleteEmployee(id: string): Promise<{ id: string }> {
 export function listDepartments(): Promise<{ departments: Department[] }> {
 	return apiClient<{ departments: Department[] }>("/departments");
 }
+
+export function searchEmployees(
+	query: string,
+	excludeId?: string,
+): Promise<{ employees: Employee[] }> {
+	const params = new URLSearchParams();
+	params.set("query", query);
+	if (excludeId) params.set("excludeId", excludeId);
+	return apiClient<{ employees: Employee[] }>(
+		`/employees/search?${params.toString()}`,
+	);
+}

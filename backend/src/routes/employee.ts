@@ -8,6 +8,18 @@ import * as employeeService from "../services/employee";
 
 export const employeeRoutes = new Hono();
 
+employeeRoutes.get("/search", async (c) => {
+	const query = c.req.query("query") || "";
+	const excludeId = c.req.query("excludeId");
+	const result = await employeeService.searchEmployees(query, excludeId);
+
+	if (!result.success) {
+		return c.json({ error: result.error }, 500);
+	}
+
+	return c.json(result.data);
+});
+
 employeeRoutes.get("/", async (c) => {
 	const page = Number(c.req.query("page") || "1");
 	const limit = Number(c.req.query("limit") || "10");
