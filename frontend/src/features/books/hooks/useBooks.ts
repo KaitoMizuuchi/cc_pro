@@ -1,6 +1,6 @@
 import type { UpdateBookRequest } from "@hr-management/shared";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import * as bookService from "../services/book-service";
+import * as bookService from "../services/bookService";
 
 export function useBooks(page: number, limit: number) {
 	return useQuery({

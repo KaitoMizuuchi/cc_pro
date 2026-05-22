@@ -8,7 +8,7 @@ import {
 	useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import * as authService from "../services/auth-service";
+import * as authService from "../services/authService";
 
 type AuthContextValue = {
 	user: AuthUser | null;

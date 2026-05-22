@@ -74,6 +74,28 @@ bun run build            # 全workspace ビルド
 - セミコロン: あり
 - `*.config.ts` では `noDefaultExport` ルール無効
 
+### 命名規則
+
+基本は **camelCase**。以下の例外と用途別ルール:
+
+**ファイル名**
+- React コンポーネント / ページ: `PascalCase.tsx`（例: `EmployeeFormModal.tsx`, `ProjectsPage.tsx`）
+- カスタムフック: `useXxx.ts`（例: `useProjects.ts`）
+- フロントエンドの service: `camelCase` + `Service` 接尾辞（例: `projectService.ts`, `employeeService.ts`）
+- バックエンドのルート・サービス、shared の validator/type/constant: `camelCase`（単一名詞はそのまま小文字、複合語も camelCase 例: `employee.ts`, `project.ts`, `isbnLookup.ts`）
+
+**識別子（関数・変数・型・定数）**
+- 関数・変数: `camelCase`（例: `listEmployees`, `createProject`, `searchEmployees`）
+- React コンポーネント関数: `PascalCase`（例: `ProjectFormModal`）
+- カスタムフック関数: `useXxx`（例: `useCreateProject`）
+- 型・interface: `PascalCase`（例: `Employee`, `CreateProjectRequest`, `ProjectErrorCode`）
+- 定数オブジェクト: `SCREAMING_SNAKE_CASE`（例: `PROJECT_ERROR_CODES`, `EMPLOYEE_STATUS_LABELS`）
+- zod スキーマ: `camelCase` + `Schema` 接尾辞（例: `createProjectSchema`, `loginSchema`）
+- Request/Response 型: 操作名 + `Request` / `Response`（例: `CreateProjectRequest`, `EmployeeListResponse`）
+
+**API クエリパラメータ**
+- 短縮形（`q`, `id`, `cnt` 等）は避け、意図が明確な完全な単語を使う（例: `query`, `excludeId`）
+
 ### shared workspace
 
 - バリデーション（zod スキーマ）、型、エラーコードは `shared/src/` に集約する（`validators/`, `types/`, `constants/`）

@@ -5,7 +5,7 @@ import {
 	useQuery,
 	useQueryClient,
 } from "@tanstack/react-query";
-import * as employeeService from "../services/employee-service";
+import * as employeeService from "../services/employeeService";
 
 export function useEmployees(page: number, limit: number) {
 	return useQuery({

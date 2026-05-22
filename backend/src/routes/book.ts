@@ -5,7 +5,7 @@ import {
 } from "@hr-management/shared";
 import { Hono } from "hono";
 import * as bookService from "../services/book";
-import { lookupIsbn } from "../services/isbn-lookup";
+import { lookupIsbn } from "../services/isbnLookup";
 
 export const bookRoutes = new Hono();
 

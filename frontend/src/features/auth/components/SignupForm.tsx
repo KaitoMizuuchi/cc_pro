@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { ApiError } from "@/lib/api-client";
-import * as authService from "../services/auth-service";
+import * as authService from "../services/authService";
 
 export function SignupForm() {
 	const navigate = useNavigate();

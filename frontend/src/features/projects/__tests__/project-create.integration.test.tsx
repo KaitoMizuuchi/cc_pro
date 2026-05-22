@@ -7,11 +7,11 @@ import { Toaster } from "sonner";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ApiError } from "@/lib/api-client";
 import { ProjectsPage } from "@/pages/ProjectsPage";
-import * as employeeService from "../../employees/services/employee-service";
-import * as projectService from "../services/project-service";
+import * as employeeService from "../../employees/services/employeeService";
+import * as projectService from "../services/projectService";
 
-vi.mock("../../employees/services/employee-service");
-vi.mock("../services/project-service");
+vi.mock("../../employees/services/employeeService");
+vi.mock("../services/projectService");
 
 const employees: Employee[] = [
 	{
