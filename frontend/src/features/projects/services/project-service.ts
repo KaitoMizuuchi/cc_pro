@@ -1,4 +1,8 @@
-import type { Project, ProjectDetail } from "@hr-management/shared";
+import type {
+	CreateProjectRequest,
+	Project,
+	ProjectDetail,
+} from "@hr-management/shared";
 import { apiClient } from "@/lib/api-client";
 
 export function listProjects(): Promise<{ projects: Project[] }> {
@@ -7,4 +11,11 @@ export function listProjects(): Promise<{ projects: Project[] }> {
 
 export function getProject(id: string): Promise<ProjectDetail> {
 	return apiClient<ProjectDetail>(`/projects/${id}`);
+}
+
+export function createProject(input: CreateProjectRequest): Promise<Project> {
+	return apiClient<Project>("/projects", {
+		method: "POST",
+		body: JSON.stringify(input),
+	});
 }

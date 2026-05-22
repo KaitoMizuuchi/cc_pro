@@ -67,3 +67,5 @@ export {
 	employeeStatusSchema,
 	updateEmployeeSchema,
 } from "./validators/employee";
+export type { CreateProjectRequest } from "./validators/project";
+export { createProjectSchema } from "./validators/project";

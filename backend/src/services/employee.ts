@@ -15,6 +15,43 @@ const employeeInclude = {
 	department: { select: { id: true, name: true } },
 } as const;
 
+export async function searchEmployees(
+	query: string,
+	excludeId?: string,
+): Promise<EmployeeResult<{ employees: Employee[] }>> {
+	try {
+		const employees = await prisma.employee.findMany({
+			where: {
+				status: "ACTIVE",
+				...(excludeId ? { id: { not: excludeId } } : {}),
+				...(query
+					? {
+							OR: [
+								{ lastName: { contains: query, mode: "insensitive" } },
+								{ firstName: { contains: query, mode: "insensitive" } },
+							],
+						}
+					: {}),
+			},
+			take: 50,
+			include: employeeInclude,
+			orderBy: [{ lastName: "asc" }, { firstName: "asc" }],
+		});
+		return {
+			success: true,
+			data: { employees: employees as unknown as Employee[] },
+		};
+	} catch {
+		return {
+			success: false,
+			error: {
+				code: EMPLOYEE_ERROR_CODES.INTERNAL_ERROR,
+				message: "従業員の検索に失敗しました",
+			},
+		};
+	}
+}
+
 export async function listEmployees(
 	page: number,
 	limit: number,

@@ -1,5 +1,10 @@
 import type { UpdateEmployeeRequest } from "@hr-management/shared";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+	keepPreviousData,
+	useMutation,
+	useQuery,
+	useQueryClient,
+} from "@tanstack/react-query";
 import * as employeeService from "../services/employee-service";
 
 export function useEmployees(page: number, limit: number) {
@@ -21,6 +26,15 @@ export function useDepartments() {
 	return useQuery({
 		queryKey: ["departments"],
 		queryFn: () => employeeService.listDepartments(),
+	});
+}
+
+export function useSearchEmployees(query: string, excludeId?: string) {
+	return useQuery({
+		queryKey: ["employees", "search", query, excludeId ?? null],
+		queryFn: () => employeeService.searchEmployees(query, excludeId),
+		staleTime: 30_000,
+		placeholderData: keepPreviousData,
 	});
 }
 

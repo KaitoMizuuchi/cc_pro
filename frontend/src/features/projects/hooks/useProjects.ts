@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import * as projectService from "../services/project-service";
 
 export function useProjects() {
@@ -13,5 +13,15 @@ export function useProject(id: string) {
 		queryKey: ["projects", id],
 		queryFn: () => projectService.getProject(id),
 		enabled: !!id,
+	});
+}
+
+export function useCreateProject() {
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: projectService.createProject,
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["projects"] });
+		},
 	});
 }
