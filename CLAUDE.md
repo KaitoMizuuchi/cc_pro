@@ -74,13 +74,22 @@ bun run build            # 全workspace ビルド
 - セミコロン: あり
 - `*.config.ts` では `noDefaultExport` ルール無効
 
+### shared workspace
+
+- バリデーション（zod スキーマ）、型、エラーコードは `shared/src/` に集約する（`validators/`, `types/`, `constants/`）
+- フロント/バックで同じ定義を重複定義しない
+- `shared/src/index.ts` から re-export し、`@hr-management/shared` 経由で参照する
+
 ### 注意事項
 
 - `frontend/tsconfig.json` に `composite: true`、`declaration: true`、`emitDeclarationOnly: true` が設定されている。型チェック時は必ず `tsc --noEmit` を使うこと。`tsc` を `--noEmit` なしで実行すると `frontend/src/` 配下に大量の `.d.ts` ファイルが生成されるため注意。
+- `frontend/tsconfig.json` の `types: ["vitest/globals", "@testing-library/jest-dom"]` を維持する（テストで `toBeInTheDocument` などの型を解決するため）。
 
 ### 開発ガイドライン
 
-一つのファイルに複数の役割を持たせないようにする。
+- 一つのファイルに複数の役割を持たせないようにする
+- テストの書き方は `.claude/rules/test-guide.md` を参照（結合テスト中心、`useMutation` のアサーション、jest-dom matchers の登録など）
+- プロジェクト方針・プロダクト要件・ロードマップは `docs/steering/` を参照（`product.md`, `tech.md`, `structure.md`, `mvp-roadmap.md`）
 
 ## 開発環境
 
@@ -99,54 +108,23 @@ bun run build            # 全workspace ビルド
 | テスト                   | vitest, @testing-library/react |
 | リンター・フォーマッター | Biome                          |
 
-# AI-DLC and Spec-Driven Development
+## プロジェクト方針ドキュメント
 
-Kiro-style Spec Driven Development implementation on AI-DLC (AI Development Life Cycle)
+プロダクト要件・技術選定・構造・ロードマップは `docs/steering/` を参照する:
 
-## Project Context
+- `docs/steering/product.md` - プロダクトの目的・対象ユーザー
+- `docs/steering/tech.md` - 技術選定とその理由
+- `docs/steering/structure.md` - ディレクトリ構造・モジュール境界
+- `docs/steering/mvp-roadmap.md` - MVP に向けたロードマップ
 
-### Paths
+## ルール・ガイド
 
-- Steering: `.kiro/steering/`
-- Specs: `.kiro/specs/`
+`.claude/rules/` に作業時の参照ガイドを集約する:
 
-### Steering vs Specification
+- `.claude/rules/test-guide.md` - テスト作成・修正時の指針（結合テスト中心、setup・モック・アサーションの落とし穴）
 
-**Steering** (`.kiro/steering/`) - Guide AI with project-wide rules and context
-**Specs** (`.kiro/specs/`) - Formalize development process for individual features
+## 開発スタンス
 
-### Active Specifications
-
-- Check `.kiro/specs/` for active specifications
-- Use `/kiro:spec-status [feature-name]` to check progress
-
-## Development Guidelines
-
-- Think in English, generate responses in Japanese. All Markdown content written to project files (e.g., requirements.md, design.md, tasks.md, research.md, validation reports) MUST be written in the target language configured for this specification (see spec.json.language).
-
-## Minimal Workflow
-
-- Phase 0 (optional): `/kiro:steering`, `/kiro:steering-custom`
-- Phase 1 (Specification):
-  - `/kiro:spec-init "description"`
-  - `/kiro:spec-requirements {feature}`
-  - `/kiro:validate-gap {feature}` (optional: for existing codebase)
-  - `/kiro:spec-design {feature} [-y]`
-  - `/kiro:validate-design {feature}` (optional: design review)
-  - `/kiro:spec-tasks {feature} [-y]`
-- Phase 2 (Implementation): `/kiro:spec-impl {feature} [tasks]`
-  - `/kiro:validate-impl {feature}` (optional: after implementation)
-- Progress check: `/kiro:spec-status {feature}` (use anytime)
-
-## Development Rules
-
-- 3-phase approval workflow: Requirements → Design → Tasks → Implementation
-- Human review required each phase; use `-y` only for intentional fast-track
-- Keep steering current and verify alignment with `/kiro:spec-status`
-- Follow the user's instructions precisely, and within that scope act autonomously: gather the necessary context and complete the requested work end-to-end in this run, asking questions only when essential information is missing or the instructions are critically ambiguous.
-
-## Steering Configuration
-
-- Load entire `.kiro/steering/` as project memory
-- Default files: `product.md`, `tech.md`, `structure.md`
-- Custom files are supported (managed via `/kiro:steering-custom`)
+- ユーザーの指示の範囲内で自律的に動く: 必要な情報を集め、エンドツーエンドで完遂する
+- 情報が決定的に不足している場合・指示が極めて曖昧な場合のみ確認する
+- 思考は英語でも構わないが、ユーザーへの応答とプロジェクトの Markdown は日本語で書く
